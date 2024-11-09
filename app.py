@@ -3,7 +3,7 @@ import streamlit as st
 # Set up page
 st.set_page_config(
     page_title="Interactive Reading App",
-    page_icon="📚",
+    page_icon=":material/library_books:",
     layout="centered",
     initial_sidebar_state="collapsed")
 

@@ -4,7 +4,7 @@ import logic as lg
 
 st.set_page_config(
     page_title="Start Reading",
-    page_icon="📖",
+    page_icon=":material/record_voice_over:",
     layout="centered",
     initial_sidebar_state="collapsed")
 

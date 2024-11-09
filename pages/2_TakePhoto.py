@@ -3,7 +3,7 @@ from PIL import Image
 
 st.set_page_config(
     page_title="Take Photos",
-    page_icon="📸",
+    page_icon=":material/photo_camera:",
     layout="centered",
     initial_sidebar_state="collapsed")
 

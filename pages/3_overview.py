@@ -4,7 +4,7 @@ import os
 
 st.set_page_config(
     page_title="Overview",
-    page_icon="📸",
+    page_icon=":material/overview:",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
