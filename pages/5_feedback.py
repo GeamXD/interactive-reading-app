@@ -35,7 +35,6 @@ with btn_1:
                 text=sample_text_1,
                 output_filename='speech'
             )
-            st.success(f"Successfully generated audio file: {oxutput_file}")
         except Exception as e:
             print(f"Error generating speech: {e}")
 
