@@ -1,5 +1,12 @@
 import os
 from google.cloud import texttospeech
+import streamlit as st
+from google.oauth2 import service_account
+
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
 
 def text_to_wav(voice_name: str, text: str, output_filename: str = None) -> str:
     """
@@ -16,12 +23,12 @@ def text_to_wav(voice_name: str, text: str, output_filename: str = None) -> str:
     Raises:
         Exception: If credentials are not properly set up
     """
-    # Ensure credentials are set
-    if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
-        raise Exception("Please set GOOGLE_APPLICATION_CREDENTIALS environment variable")
+    # # Ensure credentials are set
+    # if 'GOOGLE_APPLICATION_CREDENTIALS' not in os.environ:
+    #     raise Exception("Please set GOOGLE_APPLICATION_CREDENTIALS environment variable")
 
     # Initialize client
-    client = texttospeech.TextToSpeechClient()
+    client = texttospeech.TextToSpeechClient(credentials=credentials)
     
     # Extract language code from voice name (e.g., 'en-GB' from 'en-GB-Standard-A')
     language_code = "-".join(voice_name.split("-")[:2])
@@ -62,17 +69,16 @@ def text_to_wav(voice_name: str, text: str, output_filename: str = None) -> str:
 
 # Example usage
 if __name__ == "__main__":
-    # Set your Google Cloud credentials
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'demo_service_account.json'
-    
+
     # Example text
-    sample_text = 'Keras is a deep learning API written in Python that runs on top of TensorFlow. It is quite popular among deep learning users because of its ease of use'
+    sample_text = 'Testing'
     
     # Convert text to speech
     try:
         output_file = text_to_wav(
             voice_name='en-GB-Standard-A',
-            text=sample_text
+            text=sample_text,
+            output_filename='testing'
         )
         print(f"Successfully generated audio file: {output_file}")
     except Exception as e:

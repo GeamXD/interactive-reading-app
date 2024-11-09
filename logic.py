@@ -1,12 +1,18 @@
 import os
 import google.generativeai as genai
-import torch
-from TTS.api import TTS
 import PIL.Image
 import numpy as np
+import streamlit as st
+from google.cloud import texttospeech
+from google.oauth2 import service_account
+
+# Create credentials
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
 
 # Initialize gemini
-genai.configure(api_key=os.environ['GEMINI_API_KEY'])
+genai.configure(api_key=st.secrets['GEMINI_API_KEY'])
 
 # Create gemini model
 MODEL = 'gemini-1.5-flash'
@@ -90,16 +96,61 @@ def set_questions(text: str) -> str:
     result = gemini_client.generate_content([prompt, report])
     return result.text
 
-def text_to_speech(text: str) -> np.array:
+def text_to_wav(voice_name: str, text: str, output_filename: str = None) -> str:
     """
-    Converts text to speech
-
+    Convert text to speech using Google Cloud Text-to-Speech API and save as WAV file.
+    
     Args:
-        text: simple text input
+        voice_name (str): The voice name (e.g., 'en-GB-Standard-A')
+        text (str): The text to convert to speech
+        output_filename (str, optional): Custom output filename. If None, uses voice name
+    
     Returns:
-        A numpy array of audio
+        str: Path to the generated audio file
+    
+    Raises:
+        Exception: If credentials are not properly set up
     """
-    pass
+    # Initialize client
+    client = texttospeech.TextToSpeechClient(credentials=credentials)
+    
+    # Extract language code from voice name (e.g., 'en-GB' from 'en-GB-Standard-A')
+    language_code = "-".join(voice_name.split("-")[:2])
+    
+    # Create the synthesis input
+    synthesis_input = texttospeech.SynthesisInput(text=text)
+    
+    # Configure voice parameters
+    voice = texttospeech.VoiceSelectionParams(
+        language_code=language_code,
+        name=voice_name
+    )
+    
+    # Configure audio output
+    audio_config = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.LINEAR16
+    )
+    
+    # Generate the speech
+    response = client.synthesize_speech(
+        input=synthesis_input,
+        voice=voice,
+        audio_config=audio_config
+    )
+    
+    # Generate output filename if not provided
+    if output_filename is None:
+        output_filename = f"{voice_name}.wav"
+    elif not output_filename.endswith('.wav'):
+        output_filename += '.wav'
+    
+    # Save the audio content
+    with open(output_filename, "wb") as out:
+        out.write(response.audio_content)
+        print(f'Generated speech saved to "{output_filename}"')
+    
+    return output_filename
+
 
 def evaluate_passage_reading(passage: str, word: str) -> str:
     """
@@ -126,46 +177,3 @@ def evaluate_passage_reading(passage: str, word: str) -> str:
     """
     response = gemini_client.generate_content(prompt)
     return response.text
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # # Get device
-# # device = "cuda" if torch.cuda.is_available() else "cpu"
-
-# # # List available 🐸TTS models
-# # print(TTS().list_models())
-
-# # # TTS with fairseq models
-# # api = TTS("tts_models/deu/fairseq/vits")
-# # api.tts_to_file?
-
-
-# import torch
-# from TTS.api import TTS
-
-# # Get device
-# device = "cuda" if torch.cuda.is_available() else "cpu"
-
-# # Init TTS with the target model name
-# tts = TTS(model_name="tts_models/en/ek1/tacotron2", progress_bar=False)
-# # Run TTS
-# text_a = """
-# Keras is a deep learning API written in Python that runs on top of TensorFlow. 
-# It is quite popular among deep learning users because of its ease of use.
-# """
-# tts.tts_to_file(text=text_a, file_path='output.wav')
-
-# # api = TTS(model_name="tts_models/eng/fairseq/vits").to(device)
-# # api.tts_to_file("This is a test.", file_path="output.wav")
