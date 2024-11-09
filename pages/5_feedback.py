@@ -11,7 +11,6 @@ st.set_page_config(
 st.title('Feedback')
 st.caption('Provide feedback on the accuracy of the spoken text.')
 
-print(st.session_state['recog_eval_report'])
 with st.container(border=True):
     try:
         if st.session_state['reading_report']:
@@ -21,6 +20,14 @@ with st.container(border=True):
             st.markdown(st.session_state['recog_eval_report'])
             sample_text_2 = remove_markdown_formatting(st.session_state['recog_eval_report'])
 
+    except:
+        pass
+
+with st.container(border=True):
+    try:
+        if st.session_state['recog_eval_report']:
+            st.markdown(st.session_state['recog_eval_report'])
+            sample_text_2 = remove_markdown_formatting(st.session_state['recog_eval_report'])
     except:
         pass
 
