@@ -26,7 +26,7 @@ if uploaded_file:
 
 bt_1, bt_2 = st.columns(2)
 with bt_1:
-    if st.button('Start Reading', use_container_width=True):
+    if st.button('Start Exercise', use_container_width=True):
         st.switch_page('pages/4_start_reading.py')
 with bt_2:
     if st.button('Go to Overview', use_container_width=True):

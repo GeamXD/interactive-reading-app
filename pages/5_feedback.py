@@ -1,5 +1,6 @@
 import streamlit as st
-
+import logic as lg
+from msc import remove_markdown_formatting
 
 st.set_page_config(
     page_title="FeedBack",
@@ -15,10 +16,10 @@ with st.container(border=True):
     try:
         if st.session_state['reading_report']:
             st.markdown(st.session_state['reading_report'])
-            sample_text_1 = st.session_state['reading_report']
+            sample_text_1 = remove_markdown_formatting(st.session_state['reading_report'])
         if st.session_state['recog_eval_report']:
             st.markdown(st.session_state['recog_eval_report'])
-            sample_text_2 = st.session_state['recog_eval_report']
+            sample_text_2 = remove_markdown_formatting(st.session_state['recog_eval_report'])
 
     except:
         pass
@@ -34,7 +35,7 @@ with btn_1:
                 text=sample_text_1,
                 output_filename='speech'
             )
-            st.success(f"Successfully generated audio file: {output_file}")
+            st.success(f"Successfully generated audio file: {oxutput_file}")
         except Exception as e:
             print(f"Error generating speech: {e}")
 
@@ -47,20 +48,23 @@ with btn_3:
                 text=sample_text_2,
                 output_filename='speech'
             )
-            st.success(f"Successfully generated audio file: {output_file}")
         except Exception as e:
             print(f"Error generating speech: {e}")
 
 # Play audio
 try:
-    st.audio('speech.wav', autoplay=True)
+    st.audio('speech.wav', autoplay=False)
 except Exception as e:
     pass
 
 bt_1, bt_2, bt_3 = st.columns(3)
 with bt_1:
     if st.button('Retake Exercise', use_container_width=True):
-        st.switch_page('pages/4_start_reading.py')
+        st.session_state['reading_report'] = None
+        st.session_state['recog_eval_report'] = None
+        st.switch_page('pages/1_TakePhoto_btn.py')
+
+
 with bt_3:
     if st.button('Go to Overview', use_container_width=True):
         st.switch_page('pages/3_overview.py')

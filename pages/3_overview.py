@@ -30,5 +30,5 @@ with bt_1:
         delete_file('image_1.jpg')
         st.switch_page('pages/2_TakePhoto.py')
 with bt_3:
-    if st.button('Start Reading', use_container_width=True):
+    if st.button('Start Exercise', use_container_width=True):
         st.switch_page('pages/4_start_reading.py')

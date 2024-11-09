@@ -56,7 +56,7 @@ def evaluate_image_recognition(response: str, observation: str) -> str:
     Returns:
         A string of text
     """
-    prompt = f'Check to see the correctness of {response} to {observation}, and grade the accuracy'
+    prompt = f'Check to see the correctness of {response} to {observation}, and grade the accuracy. keep it very short and sweet'
     result = gemini_client.generate_content(prompt)
     return result.text
 
@@ -69,7 +69,7 @@ def text_from_audio(audio_path: str) -> str:
         A string of text
     """
     audio = genai.upload_file(audio_path)
-    prompt = 'extract texts only from this audio'
+    prompt = 'extract texts from words exactly as it is said, make no modifications'
     response = gemini_client.generate_content([prompt, audio])
     return response.text
 
@@ -83,7 +83,8 @@ def set_questions(text: str) -> str:
         A string of texts
     """
     prompt = f"""
-    Using {text} as basis, set simple questions and answers. 
+    Using {text} as basis, set simple questions and answers.
+    NOTE: IF YOU FACE A SITUATION WHERE NO QUESTIONS CAN BE GENERATED, SAY SO.
     """
     report = """
     return simple markdown with questions and answers in good format where users can find the answer at the bottom in this format
