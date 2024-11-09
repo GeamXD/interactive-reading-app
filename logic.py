@@ -56,7 +56,7 @@ def evaluate_image_recognition(response: str, observation: str) -> str:
     Returns:
         A string of text
     """
-    prompt = f'Check to see the correctness of {response} to {observation}, and grade the accuracy. keep it very short and sweet'
+    prompt = f'Check to see the correctness of {response} to {observation}, and grade the accuracy on scale of 10. keep it very short and sweet'
     result = gemini_client.generate_content(prompt)
     return result.text
 
