@@ -13,6 +13,15 @@ This app provides tailored support for individuals with reading difficulties, su
 - **Text-to-Speech**: Converts evaluation feedback to audio, providing users with a spoken assessment.
 - **Evaluation & Feedback**: Offers real-time evaluation on reading accuracy, pronunciation, and object identification with a concise and structured feedback report.
 
+## Workflow
+1. **Input**: Users upload images or audio of text passages.
+2. **Processing**:
+   - Text is extracted from images for reading.
+   - Audio is transcribed and analyzed for reading accuracy.
+   - Objects in images are identified for practice in verbal description.
+3. **Output**: Users receive a feedback report with visual and audio components, enhancing both reading and comprehension skills.
+
+
 ## Installation
 ### Prerequisites
 - Python 3.7 or later
