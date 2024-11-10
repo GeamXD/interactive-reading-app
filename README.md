@@ -65,8 +65,8 @@ GEMINI_API_KEY = "<your_gemini_api_key>"
 - **evaluate_passage_reading(passage, word)**: Provides reading evaluation with pronunciation guidance.
 
 ## Live Demo & Video
-- **[Live Demo](https://link_to_demo.com)**: Try out the Interactive Reading App live.
-- **[Video Demo](https://link_to_video_demo.com)**: Watch a demo of the app in action.
+- **[Live Demo](https://interactive-reading-app.streamlit.app)**: Try out the Interactive Reading App live.
+- **[Video Demo](https://www.loom.com/share/a3bf93c8d7d14fb5bd3344cb7a91fad6?sid=7417df2d-4782-4593-8872-1dfa8b63d7b7)**: Watch a demo of the app in action.
 
 ## Contributing
 1. Fork the repository and create a new branch for your feature.
