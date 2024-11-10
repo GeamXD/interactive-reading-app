@@ -69,7 +69,7 @@ def text_from_audio(audio_path: str) -> str:
         A string of text
     """
     audio = genai.upload_file(audio_path)
-    prompt = 'extract texts only, make no modifications'
+    prompt = 'extract texts only from audio'
     response = gemini_client.generate_content([prompt, audio])
     return response.text
 
