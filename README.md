@@ -55,6 +55,12 @@ client_x509_cert_url = "<your_client_cert_url>"
 GEMINI_API_KEY = "<your_gemini_api_key>"
 ```
 
+Example configuration in `config.toml`:
+```toml
+[client]
+showSidebarNavigation = false
+```
+
 ## Usage
 1. **Launch the app**: Run the Streamlit app using `streamlit run app.py`.
 2. **Navigate through pages**:
