@@ -83,6 +83,19 @@ showSidebarNavigation = false
 - **[Live Demo](https://interactive-reading-app.streamlit.app)**: Try out the Interactive Reading App live.
 - **[Video Demo](https://www.loom.com/share/a3bf93c8d7d14fb5bd3344cb7a91fad6?sid=7417df2d-4782-4593-8872-1dfa8b63d7b7)**: Watch a demo of the app in action.
 
+
+## Future Modifications & Enhanced Model Integration
+
+To improve accuracy and user experience, future modifications will focus on integrating more advanced models and additional features. Current constraints with the Gemini Flash model limit the app's performance in nuanced reading assessment and object identification. Potential upgrades include:
+
+- **Model Enhancements**: Integrating more advanced, state-of-the-art language models as they become accessible, such as the more powerful Gemini or similar LLMs. These models can provide deeper contextual understanding and better pronunciation analysis, allowing for more personalized feedback.
+  
+- **Advanced Speech and Object Recognition**: Utilizing more sophisticated audio and visual processing models to refine reading evaluations and object recognition capabilities, potentially offering feedback on tone, intonation, and specific object details.
+
+- **Improved Pronunciation and Fluency Scoring**: Leveraging models with robust NLP capabilities to provide nuanced insights into fluency, pacing, and pronunciation, enhancing learning for users with reading challenges.
+
+- **User Customization**: Adding options to personalize feedback types and formats based on individual user needs, supported by more flexible AI models.
+
 ## Contributing
 1. Fork the repository and create a new branch for your feature.
 2. Make your changes, and submit a pull request with a detailed description.
